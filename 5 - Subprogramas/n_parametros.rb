@@ -1,6 +1,7 @@
-def listar_nomes(*nomes)
-    nomes.join(", ")
-  end
+
+def soma_tudo(*numeros)
+    soma = numeros.sum
+end
   
-  puts listar_nomes("João", "Maria", "Pedro")  # Saída: João, Maria, Pedro
+puts soma_tudo(4, 5, 9, 1, 20, -3)  # 36
 
