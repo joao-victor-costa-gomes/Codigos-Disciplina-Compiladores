@@ -1,10 +1,7 @@
 import re
 
-# Expressão regular geral unificada
-expressao_regular = r"(0|[1-9][0-9]*|-?[1-9][0-9]*)" \
-                  r"|((0|[1-9][0-9]*|-?[1-9][0-9]*)\s*:\s*(0|[1-9][0-9]*|-?[1-9][0-9]*))" \
-                  r"|(\"[\w\s]+\"|'[\w\s]+')" \
-                  r"|((\"[\w\s]+\"|'[\w\s]+')\s*:\s*(\"[\w\s]+\"|'[\w\s]+'))"
+# Expressão regular final da questão anterior
+expressao_regular = r"(0|-?[1-9][0-9]*)|(((0|[1-9][0-9]*):(0|[1-9][0-9]*))|((-[1-9][0-9]*):(-[1-9][0-9]*)))|(\"[\w\s]+\"|'[\w\s]+')|((\"[\w\s]+\"|'[\w\s]+'):(\"[\w\s]+\"|'[\w\s]+'))"
 
 # Exemplos para teste
 cadeias = [
@@ -14,16 +11,16 @@ cadeias = [
     "'Data':'State'", '"District":"Tested"', "'simples'"+":"+'"duplas"', '"duplas"'+":"+"'simples'",                           
 ]
 
-# Função para exibir resultados com mensagem personalizada
+# Função para testar as cadeias
 def testar_expressao(expressao, testes):
     padrao = re.compile(expressao)
     resultados = []
     for teste in testes:
         match = padrao.fullmatch(teste)
         if match:
-            resultados.append(f"{teste} é reconhecida")
+            resultados.append(f"{teste} ---> é reconhecida")
         else:
-            resultados.append(f"{teste} NÃO é reconhecida")
+            resultados.append(f"{teste} ---> NÃO é reconhecida")
     return resultados
 
 # Executando o teste
