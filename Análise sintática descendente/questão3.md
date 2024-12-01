@@ -1,6 +1,6 @@
-## 3) Análise Sintática LL(1) das Cadeias
+## 3) **Análise Sintática LL(1) das Cadeias**
 
-## Tabela LL(1)
+### **Tabela LL(1)**
 
 | **Não-terminal** | **v**                | **p**                | **n**                | **s**                | **[**                | **]**                | **:**                | **$**        |
 |-------------------|----------------------|----------------------|----------------------|----------------------|----------------------|----------------------|----------------------|--------------|
@@ -14,9 +14,9 @@
 
 ---
 
-## Análise da Cadeia `v [ v [ p : p ] ]`
+### **Análise da Cadeia `v [ v [ p : p ] ]`**
 
-### **Passo 1: Início**
+#### **Passo 1: Início**
 A cadeia começa com `v`, que corresponde ao símbolo inicial `<expr>`. Na tabela, para `<expr>` com `v`, temos a produção:
 
 ```
@@ -25,7 +25,7 @@ A cadeia começa com `v`, que corresponde ao símbolo inicial `<expr>`. Na tabel
 
 Agora temos: `v [ <index> ]`
 
-### **Passo 2: Analisando `<var>`**
+#### **Passo 2: Analisando `<var>`**
 O próximo símbolo é `v`, que corresponde à produção para `<var>`:
 
 ```
@@ -34,7 +34,7 @@ O próximo símbolo é `v`, que corresponde à produção para `<var>`:
 
 Agora temos: `[ <index> ]`
 
-### **Passo 3: Analisando o `[` após `<var>`**
+#### **Passo 3: Analisando o `[` após `<var>`**
 O próximo símbolo é `[`. De acordo com a tabela, para `<index>` com `[` devemos usar a produção `<nested>`, pois `[` é seguido por outra lista de expressões entre colchetes. A produção é:
 
 ```
@@ -43,7 +43,7 @@ O próximo símbolo é `[`. De acordo com a tabela, para `<index>` com `[` devem
 
 Agora temos: `v [ <index> ]`
 
-### **Passo 4: Analisando o próximo `<var>`**
+#### **Passo 4: Analisando o próximo `<var>`**
 O próximo símbolo é `v`. Usamos novamente a produção de `<var>`:
 
 ```
@@ -52,7 +52,7 @@ O próximo símbolo é `v`. Usamos novamente a produção de `<var>`:
 
 Agora temos: `[ <index> ]`
 
-### **Passo 5: Analisando o `[` após o segundo `<var>`**
+#### **Passo 5: Analisando o `[` após o segundo `<var>`**
 O próximo símbolo é `[`. Como estamos em `<index>`, utilizamos novamente a produção `<nested>`:
 
 ```
@@ -61,7 +61,7 @@ O próximo símbolo é `[`. Como estamos em `<index>`, utilizamos novamente a pr
 
 Agora temos: `v [ p : p ]`
 
-### **Passo 6: Analisando o `p : p`**
+#### **Passo 6: Analisando o `p : p`**
 Após o símbolo `[`, temos `p : p`, que corresponde à produção de `<slice>`:
 
 ```
@@ -84,14 +84,16 @@ Em seguida, analisamos o segundo `p`:
 
 Agora temos: `]`
 
-### **Passo 7: Finalizando**
+#### **Passo 7: Finalizando**
 O próximo símbolo é `]`, que finaliza a cadeia. A análise está completa, e a cadeia foi derivada corretamente!
+
+**Resultado**: A cadeia `v [ v [ p : p ] ]` **é aceita** pela gramática.
 
 ---
 
-## Análise da Cadeia `v [ p : s ]`
+### **Análise da Cadeia `v [ p : s ]`**
 
-### **Passo 1: Início**
+#### **Passo 1: Início**
 A cadeia começa com `v`, que corresponde ao símbolo inicial `<expr>`. Na tabela, para `<expr>` com `v`, temos a produção:
 
 ```
@@ -100,7 +102,7 @@ A cadeia começa com `v`, que corresponde ao símbolo inicial `<expr>`. Na tabel
 
 Agora temos: `v [ <index> ]`
 
-### **Passo 2: Analisando `<var>`**
+#### **Passo 2: Analisando `<var>`**
 O próximo símbolo é `v`, que corresponde à produção para `<var>`:
 
 ```
@@ -109,14 +111,14 @@ O próximo símbolo é `v`, que corresponde à produção para `<var>`:
 
 Agora temos: `[ <index> ]`
 
-### **Passo 3: Analisando o `[` após `<var>`**
+#### **Passo 3: Analisando o `[` após `<var>`**
 O próximo símbolo é `[`. De acordo com a tabela, para `<index>` com `[` devemos usar a produção `<slice>`, porque estamos lidando com índices e colchetes. A produção é:
 
 ```
 <slice> ::= <num> : <num>
 ```
 
-### **Passo 4: Analisando o `p : s`**
+#### **Passo 4: Analisando o `p : s`**
 Após o símbolo `[`, temos `p : s`, que corresponde a um **slice** de números e strings.
 
 Primeiro, analisamos o `p` com a produção de `<num>`:
@@ -135,10 +137,16 @@ Em seguida, analisamos o `s` com a produção de `<str>`:
 
 Agora temos: `]`
 
-### **Passo 5: Finalizando**
+#### **Passo 5: Finalizando**
 O próximo símbolo é `]`, que finaliza a cadeia. A análise está completa, e a cadeia foi derivada corretamente!
+
+**Resultado**: A cadeia `v [ p : s ]` **não é aceita** pela gramática, pois a gramática não permite intervalos entre números e strings em um slice. O formato correto de slice deve ser composto por números e números ou strings e strings, mas não números e strings.
 
 ---
 
-- **Cadeia `v [ v [ p : p ] ]`**: A cadeia foi analisada corretamente utilizando a tabela LL(1), e as produções foram aplicadas conforme esperado.
-- **Cadeia `v [ p : s ]`**: A cadeia também foi analisada corretamente utilizando a tabela LL(1), e as produções de números e strings foram aplicadas conforme a tabela.
+### **Resumo:**
+
+- **Cadeia `v [ v [ p : p ] ]`**: **Aceita** pela gramática.
+- **Cadeia `v [ p : s ]`**: **Não aceita** pela gramática, devido ao intervalo entre número e string no slice.
+
+---
