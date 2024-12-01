@@ -9,7 +9,7 @@ A gramática que define o formato das cadeias, utilizando variáveis, números e
 <index>   ::= <num> | <str> | <slice> | <nested>
 <num>     ::= p | n
 <str>     ::= s
-<slice>   ::= <num> : <num> | <str> : <str> | <num> : | : <num> | <str> : | : <str>
+<slice>   ::= <num> : <num> | <str> : <str> | <num> : | : <num> | <str> : | : <str> | :
 <nested>  ::= <var> [ <index> ]
 ```
 
