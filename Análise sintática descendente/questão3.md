@@ -1,152 +1,126 @@
-## 3) **Análise Sintática LL(1) das Cadeias**
 
-### **Tabela LL(1)**
+## Questão 3: Construção da Tabela de Análise Sintática LL(1)
 
-| **Não-terminal** | **v**                | **p**                | **n**                | **s**                | **[**                | **]**                | **:**                | **$**        |
-|-------------------|----------------------|----------------------|----------------------|----------------------|----------------------|----------------------|----------------------|--------------|
-| `<expr>`          | `<var> [ <index> ]`  |                      |                      |                      |                      |                      |                      | `<EOF>`      |
-| `<var>`           | `v`                  |                      |                      |                      |                      |                      |                      |              |
-| `<index>`         |                      | `<num>`              | `<num>`              | `<str>`              | `<nested>`           |                      |                      |              |
-| `<num>`           |                      | `p`                  | `n`                  |                      |                      |                      |                      |              |
-| `<str>`           |                      |                      |                      | `s`                  |                      |                      |                      |              |
-| `<slice>`         |                      | `<num> : <num>`      | `<num> : <num>`      | `<str> : <str>`      |                      |                      |                      |              |
-| `<nested>`        | `v [ <index> ]`      |                      |                      |                      |                      |                      |                      |              |
+## **Tabela LL(1)**
 
----
+Com base nos conjuntos **FIRST** e **FOLLOW**, a tabela LL(1) é construída como segue:
 
-### **Análise da Cadeia `v [ v [ p : p ] ]`**
-
-#### **Passo 1: Início**
-A cadeia começa com `v`, que corresponde ao símbolo inicial `<expr>`. Na tabela, para `<expr>` com `v`, temos a produção:
-
-```
-<expr> ::= <var> [ <index> ]
-```
-
-Agora temos: `v [ <index> ]`
-
-#### **Passo 2: Analisando `<var>`**
-O próximo símbolo é `v`, que corresponde à produção para `<var>`:
-
-```
-<var> ::= v
-```
-
-Agora temos: `[ <index> ]`
-
-#### **Passo 3: Analisando o `[` após `<var>`**
-O próximo símbolo é `[`. De acordo com a tabela, para `<index>` com `[` devemos usar a produção `<nested>`, pois `[` é seguido por outra lista de expressões entre colchetes. A produção é:
-
-```
-<nested> ::= <var> [ <index> ]
-```
-
-Agora temos: `v [ <index> ]`
-
-#### **Passo 4: Analisando o próximo `<var>`**
-O próximo símbolo é `v`. Usamos novamente a produção de `<var>`:
-
-```
-<var> ::= v
-```
-
-Agora temos: `[ <index> ]`
-
-#### **Passo 5: Analisando o `[` após o segundo `<var>`**
-O próximo símbolo é `[`. Como estamos em `<index>`, utilizamos novamente a produção `<nested>`:
-
-```
-<nested> ::= <var> [ <index> ]
-```
-
-Agora temos: `v [ p : p ]`
-
-#### **Passo 6: Analisando o `p : p`**
-Após o símbolo `[`, temos `p : p`, que corresponde à produção de `<slice>`:
-
-```
-<slice> ::= <num> : <num>
-```
-
-Analisamos o primeiro `p` com a produção de `<num>`:
-
-```
-<num> ::= p
-```
-
-Agora temos: `: p`
-
-Em seguida, analisamos o segundo `p`:
-
-```
-<num> ::= p
-```
-
-Agora temos: `]`
-
-#### **Passo 7: Finalizando**
-O próximo símbolo é `]`, que finaliza a cadeia. A análise está completa, e a cadeia foi derivada corretamente!
-
-**Resultado**: A cadeia `v [ v [ p : p ] ]` **é aceita** pela gramática.
+| **Não-terminal** | **v**                     | **p**                     | **n**                     | **s**                     | **[** | **]** | **:**                     | **$** |
+|-------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------|-------|---------------------------|-------|
+| **expr**          | `expr → var '[' index ']'` |                           |                           |                           |       |       |                           |       |
+| **var**           | `var → v`                |                           |                           |                           |       |       |                           |       |
+| **index**         | `index → nested`         | `index → nump`            | `index → numn`            | `index → str`             |       |       | `index → slice`          |       |
+| **nump**          |                           | `nump → p`                |                           |                           |       |       |                           |       |
+| **numn**          |                           |                           | `numn → n`                |                           |       |       |                           |       |
+| **str**           |                           |                           |                           | `str → s`                 |       |       |                           |       |
+| **nested**        | `nested → var '[' index ']'` |                           |                           |                           |       |       |                           |       |
+| **slice**         |                           | `slice → nump ':' nump`   | `slice → numn ':' numn`   | `slice → str ':' str`     |       |       | `slice → ':'`            |       |
 
 ---
 
-### **Análise da Cadeia `v [ p : s ]`**
+## **Análise das Cadeias**
 
-#### **Passo 1: Início**
-A cadeia começa com `v`, que corresponde ao símbolo inicial `<expr>`. Na tabela, para `<expr>` com `v`, temos a produção:
+### **Cadeia 1: `v [ v [ p : p ] ]`**
 
-```
-<expr> ::= <var> [ <index> ]
-```
+1. **Passo 1:** Começamos com `<expr>`:
+   - A entrada começa com `v`, então seguimos a produção:
+     ```
+     expr → var '[' index ']'
+     ```
 
-Agora temos: `v [ <index> ]`
+2. **Passo 2:** Processamos `<var>`:
+   - O próximo símbolo é `v`, então usamos a produção:
+     ```
+     var → v
+     ```
 
-#### **Passo 2: Analisando `<var>`**
-O próximo símbolo é `v`, que corresponde à produção para `<var>`:
+3. **Passo 3:** Processamos `[` e chamamos `<index>`:
+   - A entrada agora é `[`, seguido por um índice. O próximo símbolo é `v`, então seguimos a produção:
+     ```
+     index → nested
+     ```
 
-```
-<var> ::= v
-```
+4. **Passo 4:** Processamos `<nested>`:
+   - O próximo símbolo é `v`, então seguimos:
+     ```
+     nested → var '[' index ']'
+     ```
 
-Agora temos: `[ <index> ]`
+5. **Passo 5:** Processamos `<var>` novamente:
+   - Usamos:
+     ```
+     var → v
+     ```
 
-#### **Passo 3: Analisando o `[` após `<var>`**
-O próximo símbolo é `[`. De acordo com a tabela, para `<index>` com `[` devemos usar a produção `<slice>`, porque estamos lidando com índices e colchetes. A produção é:
+6. **Passo 6:** Processamos outro `[` e chamamos `<index>`:
+   - O próximo símbolo é `p`, seguido por `:`, então seguimos:
+     ```
+     index → slice
+     ```
 
-```
-<slice> ::= <num> : <num>
-```
+7. **Passo 7:** Processamos `<slice>`:
+   - O próximo símbolo é `p`, então usamos:
+     ```
+     slice → nump ':' nump
+     ```
 
-#### **Passo 4: Analisando o `p : s`**
-Após o símbolo `[`, temos `p : s`, que corresponde a um **slice** de números e strings.
+8. **Passo 8:** Processamos os dois números (`p`) e o `:`:
+   - Para o primeiro `p`, usamos:
+     ```
+     nump → p
+     ```
+   - Para o segundo `p`, usamos novamente:
+     ```
+     nump → p
+     ```
 
-Primeiro, analisamos o `p` com a produção de `<num>`:
+9. **Passo 9:** Processamos o fechamento de colchetes (`]`) e terminamos a análise.
 
-```
-<num> ::= p
-```
-
-Agora temos: `: s`
-
-Em seguida, analisamos o `s` com a produção de `<str>`:
-
-```
-<str> ::= s
-```
-
-Agora temos: `]`
-
-#### **Passo 5: Finalizando**
-O próximo símbolo é `]`, que finaliza a cadeia. A análise está completa, e a cadeia foi derivada corretamente!
-
-**Resultado**: A cadeia `v [ p : s ]` **não é aceita** pela gramática, pois a gramática não permite intervalos entre números e strings em um slice. O formato correto de slice deve ser composto por números e números ou strings e strings, mas não números e strings.
+**Resultado:** A cadeia `v [ v [ p : p ] ]` é **aceita**.
 
 ---
 
-### **Resumo:**
+### **Cadeia 2: `v [ p : s ]`**
 
-- **Cadeia `v [ v [ p : p ] ]`**: **Aceita** pela gramática.
-- **Cadeia `v [ p : s ]`**: **Não aceita** pela gramática, devido ao intervalo entre número e string no slice.
+1. **Passo 1:** Começamos com `<expr>`:
+   - A entrada começa com `v`, então seguimos a produção:
+     ```
+     expr → var '[' index ']'
+     ```
+
+2. **Passo 2:** Processamos `<var>`:
+   - O próximo símbolo é `v`, então usamos a produção:
+     ```
+     var → v
+     ```
+
+3. **Passo 3:** Processamos `[` e chamamos `<index>`:
+   - A entrada agora é `[`, seguido por um índice. O próximo símbolo é `p`, então verificamos as produções:
+     ```
+     index → nump | numn | str | nested | slice
+     ```
+
+4. **Tentativas de Produções:**
+   - Para `index → nump`, `nump` consome apenas o `p`, mas não cobre o `:`.
+   - Para `index → slice`, verificamos as produções de `slice`:
+     ```
+     slice → str ':' str | str ':' | ':' str | ':' 
+             | nump ':' nump | nump ':' | ':' nump 
+             | numn ':' numn | numn ':' | ':' numn
+     ```
+     Nenhuma produção permite `nump ':' str`.
+
+5. **Conclusão:** Nenhuma produção cobre o caso `p : s`.
+
+**Resultado:** A cadeia `v [ p : s ]` **não é aceita** pela gramática.
 
 ---
+
+## **Conclusão**
+
+1. A tabela LL(1) foi construída com base nos conjuntos **FIRST** e **FOLLOW**.
+2. **Cadeia 1: `v [ v [ p : p ] ]`**:
+   - A cadeia foi analisada corretamente e é **aceita** pela gramática.
+3. **Cadeia 2: `v [ p : s ]`**:
+   - A cadeia **não é aceita** pela gramática, pois não existe uma produção que permita `p : s`.
+
