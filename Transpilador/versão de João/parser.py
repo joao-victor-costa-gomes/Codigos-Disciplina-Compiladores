@@ -12,15 +12,19 @@ def p_statements(p):
 
 # Regra para declaração de atribuição
 def p_statement_assign(p):
-    '''statement : IDENTIFIER EQUALS expression'''
-    p[0] = f"{p[1]} = {p[3]}"
+    '''statement : IDENTIFIER EQUALS expression
+                 | PRINT LPAREN expression RPAREN'''
+    if p[1] == 'print':
+        p[0] = f"puts {p[3]}"
+    else:
+        p[0] = f"{p[1]} = {p[3]}"
 
 # Regra para comentários
 def p_statement_comment(p):
     '''statement : COMMENT'''
     p[0] = p[1]
 
-# Regras para expressões aritméticas
+# Regras para expressões aritméticas e lógicas
 def p_expression_binop(p):
     '''expression : expression PLUS term
                   | expression MINUS term
@@ -56,7 +60,8 @@ def p_factor_number(p):
               | FLOAT
               | STRING
               | TRUE
-              | FALSE'''
+              | FALSE
+              | IDENTIFIER'''
     p[0] = p[1]
 
 # Regra para expressões com parênteses

@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'AND COMMENT DIVIDE EQUALS FALSE FLOAT IDENTIFIER LPAREN MINUS NUMBER OR PLUS RPAREN STRING TIMES TRUEstatements : statements statement\n                  | statementstatement : IDENTIFIER EQUALS expressionstatement : COMMENTexpression : expression PLUS term\n                  | expression MINUS term\n                  | expression AND term\n                  | expression OR termexpression : termterm : term TIMES factor\n            | term DIVIDE factorterm : factorfactor : NUMBER\n              | FLOAT\n              | STRING\n              | TRUE\n              | FALSEfactor : LPAREN expression RPAREN'
+_lr_signature = 'AND COMMENT DIVIDE EQUALS FALSE FLOAT IDENTIFIER LPAREN MINUS NUMBER OR PLUS PRINT RPAREN STRING TIMES TRUEstatements : statements statement\n                  | statementstatement : IDENTIFIER EQUALS expression\n                 | PRINT LPAREN expression RPARENstatement : COMMENTexpression : expression PLUS term\n                  | expression MINUS term\n                  | expression AND term\n                  | expression OR termexpression : termterm : term TIMES factor\n            | term DIVIDE factorterm : factorfactor : NUMBER\n              | FLOAT\n              | STRING\n              | TRUE\n              | FALSE\n              | IDENTIFIERfactor : LPAREN expression RPAREN'
     
-_lr_action_items = {'IDENTIFIER':([0,1,2,4,5,7,8,9,10,11,12,13,14,23,24,25,26,27,28,29,],[3,3,-2,-4,-1,-3,-9,-12,-13,-14,-15,-16,-17,-5,-6,-7,-8,-10,-11,-18,]),'COMMENT':([0,1,2,4,5,7,8,9,10,11,12,13,14,23,24,25,26,27,28,29,],[4,4,-2,-4,-1,-3,-9,-12,-13,-14,-15,-16,-17,-5,-6,-7,-8,-10,-11,-18,]),'$end':([1,2,4,5,7,8,9,10,11,12,13,14,23,24,25,26,27,28,29,],[0,-2,-4,-1,-3,-9,-12,-13,-14,-15,-16,-17,-5,-6,-7,-8,-10,-11,-18,]),'EQUALS':([3,],[6,]),'NUMBER':([6,15,16,17,18,19,20,21,],[10,10,10,10,10,10,10,10,]),'FLOAT':([6,15,16,17,18,19,20,21,],[11,11,11,11,11,11,11,11,]),'STRING':([6,15,16,17,18,19,20,21,],[12,12,12,12,12,12,12,12,]),'TRUE':([6,15,16,17,18,19,20,21,],[13,13,13,13,13,13,13,13,]),'FALSE':([6,15,16,17,18,19,20,21,],[14,14,14,14,14,14,14,14,]),'LPAREN':([6,15,16,17,18,19,20,21,],[15,15,15,15,15,15,15,15,]),'PLUS':([7,8,9,10,11,12,13,14,22,23,24,25,26,27,28,29,],[16,-9,-12,-13,-14,-15,-16,-17,16,-5,-6,-7,-8,-10,-11,-18,]),'MINUS':([7,8,9,10,11,12,13,14,22,23,24,25,26,27,28,29,],[17,-9,-12,-13,-14,-15,-16,-17,17,-5,-6,-7,-8,-10,-11,-18,]),'AND':([7,8,9,10,11,12,13,14,22,23,24,25,26,27,28,29,],[18,-9,-12,-13,-14,-15,-16,-17,18,-5,-6,-7,-8,-10,-11,-18,]),'OR':([7,8,9,10,11,12,13,14,22,23,24,25,26,27,28,29,],[19,-9,-12,-13,-14,-15,-16,-17,19,-5,-6,-7,-8,-10,-11,-18,]),'RPAREN':([8,9,10,11,12,13,14,22,23,24,25,26,27,28,29,],[-9,-12,-13,-14,-15,-16,-17,29,-5,-6,-7,-8,-10,-11,-18,]),'TIMES':([8,9,10,11,12,13,14,23,24,25,26,27,28,29,],[20,-12,-13,-14,-15,-16,-17,20,20,20,20,-10,-11,-18,]),'DIVIDE':([8,9,10,11,12,13,14,23,24,25,26,27,28,29,],[21,-12,-13,-14,-15,-16,-17,21,21,21,21,-10,-11,-18,]),}
+_lr_action_items = {'IDENTIFIER':([0,1,2,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,21,22,23,24,25,27,28,29,30,31,32,33,34,],[3,3,-2,-5,-1,9,9,-19,-3,-10,-13,-14,-15,-16,-17,-18,9,9,9,9,9,9,9,-4,-6,-7,-8,-9,-11,-12,-20,]),'PRINT':([0,1,2,5,6,9,10,11,12,13,14,15,16,17,27,28,29,30,31,32,33,34,],[4,4,-2,-5,-1,-19,-3,-10,-13,-14,-15,-16,-17,-18,-4,-6,-7,-8,-9,-11,-12,-20,]),'COMMENT':([0,1,2,5,6,9,10,11,12,13,14,15,16,17,27,28,29,30,31,32,33,34,],[5,5,-2,-5,-1,-19,-3,-10,-13,-14,-15,-16,-17,-18,-4,-6,-7,-8,-9,-11,-12,-20,]),'$end':([1,2,5,6,9,10,11,12,13,14,15,16,17,27,28,29,30,31,32,33,34,],[0,-2,-5,-1,-19,-3,-10,-13,-14,-15,-16,-17,-18,-4,-6,-7,-8,-9,-11,-12,-20,]),'EQUALS':([3,],[7,]),'LPAREN':([4,7,8,18,20,21,22,23,24,25,],[8,18,18,18,18,18,18,18,18,18,]),'NUMBER':([7,8,18,20,21,22,23,24,25,],[13,13,13,13,13,13,13,13,13,]),'FLOAT':([7,8,18,20,21,22,23,24,25,],[14,14,14,14,14,14,14,14,14,]),'STRING':([7,8,18,20,21,22,23,24,25,],[15,15,15,15,15,15,15,15,15,]),'TRUE':([7,8,18,20,21,22,23,24,25,],[16,16,16,16,16,16,16,16,16,]),'FALSE':([7,8,18,20,21,22,23,24,25,],[17,17,17,17,17,17,17,17,17,]),'TIMES':([9,11,12,13,14,15,16,17,28,29,30,31,32,33,34,],[-19,24,-13,-14,-15,-16,-17,-18,24,24,24,24,-11,-12,-20,]),'DIVIDE':([9,11,12,13,14,15,16,17,28,29,30,31,32,33,34,],[-19,25,-13,-14,-15,-16,-17,-18,25,25,25,25,-11,-12,-20,]),'PLUS':([9,10,11,12,13,14,15,16,17,19,26,28,29,30,31,32,33,34,],[-19,20,-10,-13,-14,-15,-16,-17,-18,20,20,-6,-7,-8,-9,-11,-12,-20,]),'MINUS':([9,10,11,12,13,14,15,16,17,19,26,28,29,30,31,32,33,34,],[-19,21,-10,-13,-14,-15,-16,-17,-18,21,21,-6,-7,-8,-9,-11,-12,-20,]),'AND':([9,10,11,12,13,14,15,16,17,19,26,28,29,30,31,32,33,34,],[-19,22,-10,-13,-14,-15,-16,-17,-18,22,22,-6,-7,-8,-9,-11,-12,-20,]),'OR':([9,10,11,12,13,14,15,16,17,19,26,28,29,30,31,32,33,34,],[-19,23,-10,-13,-14,-15,-16,-17,-18,23,23,-6,-7,-8,-9,-11,-12,-20,]),'RPAREN':([9,11,12,13,14,15,16,17,19,26,28,29,30,31,32,33,34,],[-19,-10,-13,-14,-15,-16,-17,-18,27,34,-6,-7,-8,-9,-11,-12,-20,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'statements':([0,],[1,]),'statement':([0,1,],[2,5,]),'expression':([6,15,],[7,22,]),'term':([6,15,16,17,18,19,],[8,8,23,24,25,26,]),'factor':([6,15,16,17,18,19,20,21,],[9,9,9,9,9,9,27,28,]),}
+_lr_goto_items = {'statements':([0,],[1,]),'statement':([0,1,],[2,6,]),'expression':([7,8,18,],[10,19,26,]),'term':([7,8,18,20,21,22,23,],[11,11,11,28,29,30,31,]),'factor':([7,8,18,20,21,22,23,24,25,],[12,12,12,12,12,12,12,32,33,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -30,19 +30,21 @@ _lr_productions = [
   ('statements -> statements statement','statements',2,'p_statements','parser.py',6),
   ('statements -> statement','statements',1,'p_statements','parser.py',7),
   ('statement -> IDENTIFIER EQUALS expression','statement',3,'p_statement_assign','parser.py',15),
-  ('statement -> COMMENT','statement',1,'p_statement_comment','parser.py',20),
-  ('expression -> expression PLUS term','expression',3,'p_expression_binop','parser.py',25),
-  ('expression -> expression MINUS term','expression',3,'p_expression_binop','parser.py',26),
-  ('expression -> expression AND term','expression',3,'p_expression_binop','parser.py',27),
-  ('expression -> expression OR term','expression',3,'p_expression_binop','parser.py',28),
-  ('expression -> term','expression',1,'p_expression_term','parser.py',39),
-  ('term -> term TIMES factor','term',3,'p_term_binop','parser.py',43),
-  ('term -> term DIVIDE factor','term',3,'p_term_binop','parser.py',44),
-  ('term -> factor','term',1,'p_term_factor','parser.py',51),
-  ('factor -> NUMBER','factor',1,'p_factor_number','parser.py',55),
-  ('factor -> FLOAT','factor',1,'p_factor_number','parser.py',56),
-  ('factor -> STRING','factor',1,'p_factor_number','parser.py',57),
-  ('factor -> TRUE','factor',1,'p_factor_number','parser.py',58),
-  ('factor -> FALSE','factor',1,'p_factor_number','parser.py',59),
-  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','parser.py',64),
+  ('statement -> PRINT LPAREN expression RPAREN','statement',4,'p_statement_assign','parser.py',16),
+  ('statement -> COMMENT','statement',1,'p_statement_comment','parser.py',24),
+  ('expression -> expression PLUS term','expression',3,'p_expression_binop','parser.py',29),
+  ('expression -> expression MINUS term','expression',3,'p_expression_binop','parser.py',30),
+  ('expression -> expression AND term','expression',3,'p_expression_binop','parser.py',31),
+  ('expression -> expression OR term','expression',3,'p_expression_binop','parser.py',32),
+  ('expression -> term','expression',1,'p_expression_term','parser.py',43),
+  ('term -> term TIMES factor','term',3,'p_term_binop','parser.py',47),
+  ('term -> term DIVIDE factor','term',3,'p_term_binop','parser.py',48),
+  ('term -> factor','term',1,'p_term_factor','parser.py',55),
+  ('factor -> NUMBER','factor',1,'p_factor_number','parser.py',59),
+  ('factor -> FLOAT','factor',1,'p_factor_number','parser.py',60),
+  ('factor -> STRING','factor',1,'p_factor_number','parser.py',61),
+  ('factor -> TRUE','factor',1,'p_factor_number','parser.py',62),
+  ('factor -> FALSE','factor',1,'p_factor_number','parser.py',63),
+  ('factor -> IDENTIFIER','factor',1,'p_factor_number','parser.py',64),
+  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','parser.py',69),
 ]

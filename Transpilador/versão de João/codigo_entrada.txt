@@ -20,3 +20,9 @@ op2 = False or True
 op3 = True and True 
 op4 = False or False
 op5 = False and (True or False)
+# Printando valores
+print("texto")
+print('texto') 
+print("")
+print('')
+print(variavel)

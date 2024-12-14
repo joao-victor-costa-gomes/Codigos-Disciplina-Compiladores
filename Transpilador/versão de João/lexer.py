@@ -37,6 +37,11 @@ def t_OR(t):
     t.value = '||'
     return t
 
+# Regra para print
+def t_PRINT(t):
+    r'print'
+    return t
+
 # Regras para ignorar espaços e tabulações
 t_ignore = ' \t\n'
 
