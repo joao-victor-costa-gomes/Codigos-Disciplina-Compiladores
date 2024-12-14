@@ -48,7 +48,9 @@ def p_term_factor(p):
 def p_factor_number(p):
     '''factor : NUMBER
               | FLOAT
-              | STRING'''
+              | STRING
+              | TRUE
+              | FALSE'''
     p[0] = p[1]
 
 # Regra para expressões com parênteses
