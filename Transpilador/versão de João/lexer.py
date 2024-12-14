@@ -3,6 +3,12 @@ from tokens import tokens
 
 # Regras para tokens simples
 t_EQUALS = r'='
+t_PLUS = r'\+'
+t_MINUS = r'-'
+t_TIMES = r'\*'
+t_DIVIDE = r'/'
+t_LPAREN = r'\('
+t_RPAREN = r'\)'
 t_IDENTIFIER = r'[a-zA-Z_][a-zA-Z_0-9]*'
 t_FLOAT = r'\d+\.\d+'
 t_NUMBER = r'\d+'

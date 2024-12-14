@@ -12,7 +12,7 @@ def p_statements(p):
 
 # Regra para declaração de atribuição
 def p_statement_assign(p):
-    '''statement : IDENTIFIER EQUALS value'''
+    '''statement : IDENTIFIER EQUALS expression'''
     p[0] = f"{p[1]} = {p[3]}"
 
 # Regra para comentários
@@ -20,12 +20,41 @@ def p_statement_comment(p):
     '''statement : COMMENT'''
     p[0] = p[1]
 
-# Regra para valores
-def p_value(p):
-    '''value : NUMBER
-             | FLOAT
-             | STRING'''
+# Regras para expressões aritméticas
+def p_expression_binop(p):
+    '''expression : expression PLUS term
+                  | expression MINUS term'''
+    if p[2] == '+':
+        p[0] = f"{p[1]}+{p[3]}"
+    elif p[2] == '-':
+        p[0] = f"{p[1]}-{p[3]}"
+
+def p_expression_term(p):
+    '''expression : term'''
     p[0] = p[1]
+
+def p_term_binop(p):
+    '''term : term TIMES factor
+            | term DIVIDE factor'''
+    if p[2] == '*':
+        p[0] = f"{p[1]}*{p[3]}"
+    elif p[2] == '/':
+        p[0] = f"{p[1]}/{p[3]}"
+
+def p_term_factor(p):
+    '''term : factor'''
+    p[0] = p[1]
+
+def p_factor_number(p):
+    '''factor : NUMBER
+              | FLOAT
+              | STRING'''
+    p[0] = p[1]
+
+# Regra para expressões com parênteses
+def p_factor_expr(p):
+    '''factor : LPAREN expression RPAREN'''
+    p[0] = f"({p[2]})"
 
 # Tratamento de erros
 def p_error(p):

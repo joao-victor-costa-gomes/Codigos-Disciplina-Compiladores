@@ -1,9 +1,13 @@
-# Valores inteiros
+# Declaração e atribuição de valores
 idade1 = 45
 idade2 = 30
-# Valores float
 altura1 = 1.75
 altura2 = 2.0
-# Essas são strings
 nome = "Fulano"
 outro_nome = 'Sicrano'
+# Operações aritméticas
+soma = 1 + 1 
+subtracao = 5-3
+multiplicacao = 8 * 2
+divisao = 20/5
+expressao = 5 + ((7 + 2) * (3+5))

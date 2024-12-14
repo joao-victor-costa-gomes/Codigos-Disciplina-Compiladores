@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'COMMENT EQUALS FLOAT IDENTIFIER NUMBER STRINGstatements : statements statement\n                  | statementstatement : IDENTIFIER EQUALS valuestatement : COMMENTvalue : NUMBER\n             | FLOAT\n             | STRING'
+_lr_signature = 'COMMENT DIVIDE EQUALS FLOAT IDENTIFIER LPAREN MINUS NUMBER PLUS RPAREN STRING TIMESstatements : statements statement\n                  | statementstatement : IDENTIFIER EQUALS expressionstatement : COMMENTexpression : expression PLUS term\n                  | expression MINUS termexpression : termterm : term TIMES factor\n            | term DIVIDE factorterm : factorfactor : NUMBER\n              | FLOAT\n              | STRINGfactor : LPAREN expression RPAREN'
     
-_lr_action_items = {'IDENTIFIER':([0,1,2,4,5,7,8,9,10,],[3,3,-2,-4,-1,-3,-5,-6,-7,]),'COMMENT':([0,1,2,4,5,7,8,9,10,],[4,4,-2,-4,-1,-3,-5,-6,-7,]),'$end':([1,2,4,5,7,8,9,10,],[0,-2,-4,-1,-3,-5,-6,-7,]),'EQUALS':([3,],[6,]),'NUMBER':([6,],[8,]),'FLOAT':([6,],[9,]),'STRING':([6,],[10,]),}
+_lr_action_items = {'IDENTIFIER':([0,1,2,4,5,7,8,9,10,11,12,19,20,21,22,23,],[3,3,-2,-4,-1,-3,-7,-10,-11,-12,-13,-5,-6,-8,-9,-14,]),'COMMENT':([0,1,2,4,5,7,8,9,10,11,12,19,20,21,22,23,],[4,4,-2,-4,-1,-3,-7,-10,-11,-12,-13,-5,-6,-8,-9,-14,]),'$end':([1,2,4,5,7,8,9,10,11,12,19,20,21,22,23,],[0,-2,-4,-1,-3,-7,-10,-11,-12,-13,-5,-6,-8,-9,-14,]),'EQUALS':([3,],[6,]),'NUMBER':([6,13,14,15,16,17,],[10,10,10,10,10,10,]),'FLOAT':([6,13,14,15,16,17,],[11,11,11,11,11,11,]),'STRING':([6,13,14,15,16,17,],[12,12,12,12,12,12,]),'LPAREN':([6,13,14,15,16,17,],[13,13,13,13,13,13,]),'PLUS':([7,8,9,10,11,12,18,19,20,21,22,23,],[14,-7,-10,-11,-12,-13,14,-5,-6,-8,-9,-14,]),'MINUS':([7,8,9,10,11,12,18,19,20,21,22,23,],[15,-7,-10,-11,-12,-13,15,-5,-6,-8,-9,-14,]),'RPAREN':([8,9,10,11,12,18,19,20,21,22,23,],[-7,-10,-11,-12,-13,23,-5,-6,-8,-9,-14,]),'TIMES':([8,9,10,11,12,19,20,21,22,23,],[16,-10,-11,-12,-13,16,16,-8,-9,-14,]),'DIVIDE':([8,9,10,11,12,19,20,21,22,23,],[17,-10,-11,-12,-13,17,17,-8,-9,-14,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'statements':([0,],[1,]),'statement':([0,1,],[2,5,]),'value':([6,],[7,]),}
+_lr_goto_items = {'statements':([0,],[1,]),'statement':([0,1,],[2,5,]),'expression':([6,13,],[7,18,]),'term':([6,13,14,15,],[8,8,19,20,]),'factor':([6,13,14,15,16,17,],[9,9,9,9,21,22,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -29,9 +29,16 @@ _lr_productions = [
   ("S' -> statements","S'",1,None,None,None),
   ('statements -> statements statement','statements',2,'p_statements','parser.py',6),
   ('statements -> statement','statements',1,'p_statements','parser.py',7),
-  ('statement -> IDENTIFIER EQUALS value','statement',3,'p_statement_assign','parser.py',15),
+  ('statement -> IDENTIFIER EQUALS expression','statement',3,'p_statement_assign','parser.py',15),
   ('statement -> COMMENT','statement',1,'p_statement_comment','parser.py',20),
-  ('value -> NUMBER','value',1,'p_value','parser.py',25),
-  ('value -> FLOAT','value',1,'p_value','parser.py',26),
-  ('value -> STRING','value',1,'p_value','parser.py',27),
+  ('expression -> expression PLUS term','expression',3,'p_expression_binop','parser.py',25),
+  ('expression -> expression MINUS term','expression',3,'p_expression_binop','parser.py',26),
+  ('expression -> term','expression',1,'p_expression_term','parser.py',33),
+  ('term -> term TIMES factor','term',3,'p_term_binop','parser.py',37),
+  ('term -> term DIVIDE factor','term',3,'p_term_binop','parser.py',38),
+  ('term -> factor','term',1,'p_term_factor','parser.py',45),
+  ('factor -> NUMBER','factor',1,'p_factor_number','parser.py',49),
+  ('factor -> FLOAT','factor',1,'p_factor_number','parser.py',50),
+  ('factor -> STRING','factor',1,'p_factor_number','parser.py',51),
+  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','parser.py',56),
 ]
