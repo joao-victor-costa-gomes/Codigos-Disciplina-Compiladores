@@ -7,22 +7,48 @@ nome = "Fulano"
 outro_nome = 'Sicrano'
 booleano1 = True
 booleano2 = False
+
 # Operações aritméticas
 soma = 1 + 1 
-subtracao = 5-3
+subtracao = 5 - 3
 multiplicacao = 8 * 2
-divisao = 20/5
-expressao = 5 + ((7 + 2) * (3+5))
+divisao = 20 / 5
+expressao = 5 + ((7 + 2) * (3 + 5))
 expressao_com_string = "nome" * 3
+
 # Operações com E e OU 
 op1 = True and False 
 op2 = False or True 
 op3 = True and True 
 op4 = False or False
 op5 = False and (True or False)
+
 # Printando valores
+variavel = "Valor definido"
 print("texto")
 print('texto') 
 print("")
 print('')
 print(variavel)
+
+# Testando if/else
+if idade1 > 18:
+    print("Maior de idade")
+else:
+    print("Menor de idade")
+
+# Testando for loop
+for i in range(5):
+    print(i)
+
+# Testando while loop
+contador = 0
+while contador < 10:
+    print(contador)
+    contador += 1
+
+# Testando funções
+def saudacao(nome):
+    print("Olá, " + nome)
+
+saudacao("Fulano")
