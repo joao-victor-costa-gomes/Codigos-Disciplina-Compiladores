@@ -23,11 +23,17 @@ def p_statement_comment(p):
 # Regras para expressões aritméticas
 def p_expression_binop(p):
     '''expression : expression PLUS term
-                  | expression MINUS term'''
+                  | expression MINUS term
+                  | expression AND term
+                  | expression OR term'''
     if p[2] == '+':
         p[0] = f"{p[1]}+{p[3]}"
     elif p[2] == '-':
         p[0] = f"{p[1]}-{p[3]}"
+    elif p[2] == '&&':
+        p[0] = f"{p[1]}&&{p[3]}"
+    elif p[2] == '||':
+        p[0] = f"{p[1]}||{p[3]}"
 
 def p_expression_term(p):
     '''expression : term'''

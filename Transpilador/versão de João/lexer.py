@@ -26,6 +26,17 @@ def t_FALSE(t):
     t.value = 'false'
     return t
 
+# Regras para operadores lógicos
+def t_AND(t):
+    r'and'
+    t.value = '&&'
+    return t
+
+def t_OR(t):
+    r'or'
+    t.value = '||'
+    return t
+
 # Regras para ignorar espaços e tabulações
 t_ignore = ' \t\n'
 

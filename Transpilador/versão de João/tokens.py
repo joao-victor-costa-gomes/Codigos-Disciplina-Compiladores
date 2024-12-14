@@ -2,5 +2,5 @@
 tokens = (
     'IDENTIFIER', 'EQUALS', 'NUMBER', 'FLOAT', 'STRING', 'COMMENT',
     'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'LPAREN', 'RPAREN',
-    'TRUE', 'FALSE'
+    'TRUE', 'FALSE', 'AND', 'OR'
 )
