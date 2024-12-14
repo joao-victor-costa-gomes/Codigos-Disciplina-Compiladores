@@ -1,5 +1,5 @@
 import ply.yacc as yacc
-from lexer import tokens
+from tokens import tokens
 
 # Regras para múltiplas declarações
 def p_statements(p):
@@ -10,10 +10,15 @@ def p_statements(p):
     else:
         p[0] = p[1]
 
-# Regra para declaração
+# Regra para declaração de atribuição
 def p_statement_assign(p):
     '''statement : IDENTIFIER EQUALS value'''
     p[0] = f"{p[1]} = {p[3]}"
+
+# Regra para comentários
+def p_statement_comment(p):
+    '''statement : COMMENT'''
+    p[0] = p[1]
 
 # Regra para valores
 def p_value(p):

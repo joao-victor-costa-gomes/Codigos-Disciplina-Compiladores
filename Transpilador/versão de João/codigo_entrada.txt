@@ -1,6 +1,9 @@
+# Valores inteiros
 idade1 = 45
 idade2 = 30
+# Valores float
 altura1 = 1.75
 altura2 = 2.0
+# Essas são strings
 nome = "Fulano"
 outro_nome = 'Sicrano'
