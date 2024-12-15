@@ -1,0 +1,5 @@
+# Testando funções
+def saudacao(nome):
+    print("Olá, " + nome)
+
+saudacao("Fulano")

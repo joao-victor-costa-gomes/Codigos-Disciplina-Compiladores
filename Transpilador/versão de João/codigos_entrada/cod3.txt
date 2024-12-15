@@ -1,0 +1,6 @@
+# Operações com E e OU 
+op1 = True and False 
+op2 = False or True 
+op3 = True and True 
+op4 = False or False
+op5 = False and (True or False)

@@ -6,7 +6,7 @@ def transpile(code):
     return result
 
 if __name__ == "__main__":
-    with open("C:/Users/victor/Documents/GitHub/Codigos-Disciplina-Compiladores/Transpilador/versão de João/codigo_entrada.txt", "r", encoding="utf-8") as file:
+    with open("./codigos_entrada/cod1.txt", "r", encoding="utf-8") as file:
 
         code = file.read()
 

@@ -1,0 +1,7 @@
+# Printando valores
+variavel = "Valor definido"
+print("texto")
+print('texto') 
+print("")
+print('')
+print(variavel)

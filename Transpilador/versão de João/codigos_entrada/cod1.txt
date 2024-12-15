@@ -1,0 +1,9 @@
+# Declaração e atribuição de valores
+idade1 = 45
+idade2 = 30
+altura1 = 1.75
+altura2 = 2.0
+nome = "Fulano"
+outro_nome = 'Sicrano'
+booleano1 = True
+booleano2 = False

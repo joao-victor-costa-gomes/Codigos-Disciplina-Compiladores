@@ -7,7 +7,6 @@ tokens = (
     'IF', 'ELSE', 'FOR', 'WHILE', 'DEF', 'COLON', 'IN',
     'COMMA',
     'GT', 'LT', 'GE', 'LE', 'EQ', 'NE',
-    'PLUS_EQUALS', 'MINUS_EQUALS', 'TIMES_EQUALS', 'DIVIDE_EQUALS',
-    'INDENT', 'DEDENT',  # Tokens para indentação
-    'NEWLINE',           # Token para quebras de linha
+    'PLUS_EQUALS', 'MINUS_EQUALS', 'TIMES_EQUALS', 'DIVIDE_EQUALS'
+  
 )
